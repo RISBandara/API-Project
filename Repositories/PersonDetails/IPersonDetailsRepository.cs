@@ -5,6 +5,6 @@ namespace PersonApi.Repositories.PersonDetails
 {
     public interface IPersonDetailsRepository
     {
-        Task<GetPersonDetailsResponse> GetPersonDetailsAsync(int id);
+        Task<List<GetPersonDetailsResponse>> GetPersonDetailsAsync(int id);
     }
 }

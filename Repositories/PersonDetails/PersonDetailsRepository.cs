@@ -16,7 +16,7 @@ namespace PersonApi.Repositories.PersonDetails
             _context = context;
         }
 
-        public async Task<GetPersonDetailsResponse> GetPersonDetailsAsync(int id)
+        public async Task<List<GetPersonDetailsResponse>> GetPersonDetailsAsync(int id)
         {
             var sql = "EXEC GetPersonNameById @Id";
             var param = new SqlParameter("@Id", id);
@@ -25,7 +25,7 @@ namespace PersonApi.Repositories.PersonDetails
                 .FromSqlRaw(sql, param)
                 .ToListAsync();
 
-            return result.FirstOrDefault();
+            return result;
         }
     }
 }

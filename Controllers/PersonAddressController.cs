@@ -19,7 +19,7 @@ namespace PersonApi.Controllers
         [HttpPost("GetPersonAddress")]
         public async Task<IActionResult> GetPersonAddress([FromBody] GetPersonAddressRequest request)
         {
-            var result = await _personAddressRepository.GetPersonAddressAsync(request.Id);
+            var result = await _personAddressRepository.GetPersonAddressAsync(request.Id,request.Owner);
             return Ok(result);
         }
     }

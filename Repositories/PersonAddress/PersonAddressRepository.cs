@@ -16,16 +16,21 @@ namespace PersonApi.Repositories.PersonAddress
             _context = context;
         }
 
-        public async Task<GetPersonAddressResponse> GetPersonAddressAsync(int id)
+        public async Task<List<GetPersonAddressResponse>> GetPersonAddressAsync(int id,string owner)
         {
-            var sql = "EXEC GetAddressById @Id";
-            var param = new SqlParameter("@Id", id);
+            var sql = "EXEC GetAddressById @Id ,@Owner";
+                 var param = new[]
+            {
+                new SqlParameter("@Id", id),
+                new SqlParameter("@Owner", string.IsNullOrEmpty(owner) ? DBNull.Value : owner)
+               
+            };
 
             var result = await _context.PersonAddressResponses
                 .FromSqlRaw(sql, param)
                 .ToListAsync();
 
-            return result.FirstOrDefault();
+            return result;
         }
     }
 }
